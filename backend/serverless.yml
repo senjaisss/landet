@@ -1,5 +1,4 @@
-# org: ${env:ORG}
-service: backend
+service: landet-backend
 useDotenv: true
 
 plugins:
@@ -9,4 +8,40 @@ provider:
   name: aws
   runtime: nodejs20.x
   region: eu-north-1
+  deploymentBucket: landet-bucket
   role: ${env:IAM_ROLE}
+  environment:
+    USERS_TABLE: users-table
+    BOOKINGS_TABLE: bookings-table
+
+# functions:
+
+resources:
+  Resources:
+    UsersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: users-table
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: userId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+
+    BookingsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: bookings-table
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: familyId
+            AttributeType: S
+          - AttributeName: bookingId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: familyId
+            KeyType: HASH
+          - AttributeName: bookingId
+            KeyType: RANGE
