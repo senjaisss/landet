@@ -1,0 +1,12 @@
+# org: ${env:ORG}
+service: backend
+useDotenv: true
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: eu-north-1
+  role: ${env:IAM_ROLE}
