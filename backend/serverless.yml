@@ -11,10 +11,17 @@ provider:
   deploymentBucket: landet-bucket
   role: ${env:IAM_ROLE}
   environment:
-    USERS_TABLE: users-table
-    BOOKINGS_TABLE: bookings-table
+    USERS_TABLE: ${env:USERS_TABLE}
+    BOOKINGS_TABLE: ${env:BOOKINGS_TABLE}
+    JWT_SECRET: ${env:JWT_SECRET}
 
-# functions:
+functions:
+  login:
+    handler: endpoints/login.handler
+    events:
+      - http:
+          path: login
+          method: post
 
 resources:
   Resources:
