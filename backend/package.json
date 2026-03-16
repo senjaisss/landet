@@ -12,6 +12,7 @@
   "type": "commonjs",
   "devDependencies": {
     "@types/aws-lambda": "^8.10.161",
+    "@types/http-errors": "^2.0.5",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.4.0",
     "serverless": "^4.33.0",
@@ -28,6 +29,7 @@
     "@middy/http-json-body-parser": "^6.4.5",
     "bcryptjs": "^3.0.3",
     "dotenv": "^17.3.1",
+    "http-errors": "^2.0.1",
     "jsonwebtoken": "^9.0.3",
     "zod": "^4.3.6"
   }

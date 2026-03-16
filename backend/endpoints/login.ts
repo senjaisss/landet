@@ -5,6 +5,8 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 import { db } from "@lib/db";
+import middy from "@middy/core";
+import httpErrorHandler from "@middy/http-error-handler";
 
 /* zod validering */
 const loginSchema = z.object({
@@ -12,10 +14,10 @@ const loginSchema = z.object({
   password: z.string()
 });
 
-export const handler = async (
+export const login = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
-  try {
+    
     const { userId, password } = loginSchema.parse(JSON.parse(event.body || "{}"));
 
     const result = await db.send(
@@ -28,19 +30,22 @@ export const handler = async (
     const user = result.Item;
 
     if (!user) {
-      return { statusCode: 401, body: JSON.stringify({ message: "Invalid credentials" }) };
+      throw new Error("Invalid credentials");
     }
 
     const validPassword = await bcrypt.compare(password, user.passwordHash);
     if (!validPassword) {
-      return { statusCode: 401, body: JSON.stringify({ message: "Invalid credentials" }) };
+      throw new Error("Invalid credentials");
     }
 
     /*  Skapa JWT */
+    const secret = process.env.JWT_SECRET;
+    if (!secret) throw new Error("missing JWT_SECRET");
+
     const token = jwt.sign(
-      { userId: user.userId, familyId: user.familyId },
-      process.env.JWT_SECRET as string,
-      { expiresIn: "2h" }
+        { userId: user.userId, familyId: user.familyId },
+        secret,
+        { expiresIn: "2h" }
     );
 
     return {
@@ -48,13 +53,13 @@ export const handler = async (
       body: JSON.stringify({
         token,
         user: {
-          userID: user.userId,
+          userId: user.userId,
           name: user.name,
           familyId: user.familyId
         }
       })
     };
-  } catch (error: any) {
-    return { statusCode: 400, body: JSON.stringify({ message: error.message || "Server error" }) };
-  }
 };
+
+export const handler = middy(login)
+    .use(httpErrorHandler());
