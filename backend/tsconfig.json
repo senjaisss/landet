@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@lib/*": ["lib/*"],
+      "@middlewares/*": ["middlewares/*"],
     }
   },
   "include": ["**/*.ts"],
