@@ -21,13 +21,19 @@ functions:
     events:
       - http:
           path: login
-          method: post
+          method: POST
   bookings:
     handler: endpoints/bookings.handler
     events:
       - http:
           path: bookings
           method: GET
+  booking:
+    handler: endpoints/booking.handler
+    events:
+      - http:
+          path: booking
+          method: POST
 
 resources:
   Resources:
