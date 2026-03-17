@@ -7,45 +7,50 @@ import jwt from "jsonwebtoken";
 import { db } from "@lib/db";
 import middy from "@middy/core";
 import httpErrorHandler from "@middy/http-error-handler";
+import createError from "http-errors";
 
 /* zod validering */
 const loginSchema = z.object({
   userId: z.string(),
-  password: z.string()
+  password: z.string(),
 });
 
 export const login = async (
-  event: APIGatewayProxyEvent
+  event: APIGatewayProxyEvent,
 ): Promise<APIGatewayProxyResult> => {
-    
-    const { userId, password } = loginSchema.parse(JSON.parse(event.body || "{}"));
+  try {
+    const { userId, password } = loginSchema.parse(
+      JSON.parse(event.body || "{}"),
+    );
 
     const result = await db.send(
       new GetCommand({
         TableName: process.env.USERS_TABLE,
-        Key: { userId }
-      })
+        Key: { userId },
+      }),
     );
 
     const user = result.Item;
 
     if (!user) {
-      throw new Error("Invalid credentials");
+      throw new createError.Unauthorized("Invalid credentials");
     }
 
     const validPassword = await bcrypt.compare(password, user.passwordHash);
     if (!validPassword) {
-      throw new Error("Invalid credentials");
+      throw new createError.Unauthorized("Invalid credentials");
     }
 
     /*  Skapa JWT */
     const secret = process.env.JWT_SECRET;
-    if (!secret) throw new Error("missing JWT_SECRET");
+    if (!secret) {
+      throw new createError.InternalServerError("JWT not configured");
+    }
 
     const token = jwt.sign(
-        { userId: user.userId, familyId: user.familyId },
-        secret,
-        { expiresIn: "2h" }
+      { userId: user.userId, familyId: user.familyId },
+      secret,
+      { expiresIn: "2h" },
     );
 
     return {
@@ -55,11 +60,15 @@ export const login = async (
         user: {
           userId: user.userId,
           name: user.name,
-          familyId: user.familyId
-        }
-      })
+          familyId: user.familyId,
+        },
+      }),
     };
+  } catch (error) {
+    console.error("Login error:", error);
+    throw error;
+  }
 };
 
 export const handler = middy(login)
-    .use(httpErrorHandler());
+  .use(httpErrorHandler());

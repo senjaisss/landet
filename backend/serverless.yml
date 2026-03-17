@@ -22,6 +22,12 @@ functions:
       - http:
           path: login
           method: post
+  bookings:
+    handler: endpoints/bookings.handler
+    events:
+      - http:
+          path: bookings
+          method: GET
 
 resources:
   Resources:
