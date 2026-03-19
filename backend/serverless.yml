@@ -22,18 +22,24 @@ functions:
       - http:
           path: login
           method: POST
-  bookings:
-    handler: endpoints/bookings.handler
+  getBookings:
+    handler: endpoints/getBookings.handler
     events:
       - http:
           path: bookings
           method: GET
-  booking:
-    handler: endpoints/booking.handler
+  createBooking:
+    handler: endpoints/createBooking.handler
     events:
       - http:
           path: booking
           method: POST
+  deleteBooking:
+    handler: endpoints/deleteBooking.handler
+    events:
+      - http:
+          path: bookings/{bookingId}
+          method: DELETE
 
 resources:
   Resources:

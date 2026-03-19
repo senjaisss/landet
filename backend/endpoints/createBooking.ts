@@ -40,7 +40,7 @@ export const postBooking = async (
 
     const { startDate, endDate, people } = parsed.data;
 
-    const bookingId = `${userId}#${Date.now()}`;
+    const bookingId = `${userId}_${Date.now()}`;
 
     const existingBookings = await getBookingsForFamily(familyId);
 
