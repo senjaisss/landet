@@ -11,7 +11,7 @@ import { validateBooking, Booking } from "@lib/validateBooking";
 import { isValidISODate } from "@lib/dateUtils";
 import { getBookingsForFamily } from "@lib/bookingService";
 
-const bookingSchema = z.object({
+export const bookingSchema = z.object({
   startDate: z.string().refine(isValidISODate, {
     message: "startDate must be a valid date",
   }),

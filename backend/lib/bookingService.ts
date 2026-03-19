@@ -11,6 +11,7 @@ export const getBookingsForFamily = async (familyId: string) => {
     );
     
     return (result.Items || []).map(b => ({
+    bookingId: b.bookingId,   
     startDate: b.startDate,
     endDate: b.endDate,
     people: b.people,

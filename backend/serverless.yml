@@ -40,6 +40,12 @@ functions:
       - http:
           path: bookings/{bookingId}
           method: DELETE
+  updateBooking:
+    handler: endpoints/updateBooking.handler
+    events:
+      - http:
+          path: bookings/{bookingId}
+          method: PUT
 
 resources:
   Resources:
