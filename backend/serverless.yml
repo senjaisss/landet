@@ -15,6 +15,19 @@ provider:
     BOOKINGS_TABLE: ${env:BOOKINGS_TABLE}
     JWT_SECRET: ${env:JWT_SECRET}
 
+httpApi:
+  cors:
+    allowedOrigins:
+      - http://localhost:5173
+    allowedHeaders:
+      - Content-Type
+      - Authorization
+    allowedMethods:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+
 functions:
   login:
     handler: endpoints/login.handler
