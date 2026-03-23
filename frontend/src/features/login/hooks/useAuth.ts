@@ -17,9 +17,12 @@ export function useAuth() {
     return localStorage.getItem("token");
   };
 
+  const isAuthenticated = (): boolean => !!getToken();
+
   return {
     login,
     logout,
     getToken,
+    isAuthenticated,
   };
 }
