@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { useAuth } from "../features/login/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
-export function LoginPage() {
+export function Login() {
   const { login } = useAuth();
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -17,12 +19,13 @@ export function LoginPage() {
 
     /* update errorhandling later! */
     try {
-      await login(username, password);
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Login failed");
-    } finally {
-      setLoading(false);
-    }
+    await login(username, password);
+    navigate("/home");
+  } catch (err: unknown) {
+    setError(err instanceof Error ? err.message : "Login failed");
+  } finally {
+    setLoading(false);
+  }
   };
 
   return (
