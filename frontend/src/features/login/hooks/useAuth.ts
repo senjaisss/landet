@@ -5,12 +5,14 @@ export function useAuth() {
     const data = await loginRequest(userId, password);
 
     localStorage.setItem("token", data.token);
+    localStorage.setItem("userId", data.user.userId);
 
     return data;
   };
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
   };
 
   const getToken = () => {

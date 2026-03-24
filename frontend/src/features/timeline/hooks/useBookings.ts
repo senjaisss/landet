@@ -24,5 +24,5 @@ export function useBookings() {
     fetchBookings();
   }, []);
 
-  return { bookings, loading, error };
+  return { bookings, setBookings, loading, error };
 }
