@@ -1,3 +1,4 @@
+import { BookingForm } from "../features/booking/components/BookingForm";
 import { BookingsList } from "../features/timeline/components/BookingsList";
 
 export function HomePage() {
@@ -5,6 +6,7 @@ export function HomePage() {
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Your Bookings</h1>
       <BookingsList />
+      <BookingForm />
     </div>
   )
 }
