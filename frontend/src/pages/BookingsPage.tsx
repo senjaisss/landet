@@ -8,8 +8,13 @@ export function BookingsPage() {
       className="min-h-screen bg-cover bg-center pt-4"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
-      <Navbar />
-      <BookingsList />
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+
+        <div className="flex flex-1 justify-center items-center">
+          <BookingsList />
+        </div>
+      </div>
     </div>
   );
 }

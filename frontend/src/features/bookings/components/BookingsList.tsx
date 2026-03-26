@@ -17,7 +17,6 @@ export function BookingsList() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
       <ul className="flex flex-col w-full max-w-4xl p-16 rounded-2xl bg-green-500/10 backdrop-blur-md space-y-4">
         <h1 className="text-white mb-2">
           Kommande bokningar för{" "}
@@ -54,6 +53,5 @@ export function BookingsList() {
           </li>
         ))}
       </ul>
-    </div>
   );
 }

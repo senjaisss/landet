@@ -30,54 +30,54 @@ export function BookingForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-2 p-4 border rounded w-64"
+      className="flex flex-col w-full max-w-3xl p-12 rounded-2xl bg-green-500/10 backdrop-blur-md space-y-4"
     >
-      <h2 className="font-bold">Create Booking</h2>
+      <h2 className="text-white text-xl mb-2">Skapa bokning</h2>
 
-      <label>
-        Start date
+      <label className="text-white">
+        Startdatum
         <input
           type="date"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
           required
-          className="border w-full p-1"
+          className="w-full p-3 mt-1 rounded bg-white/20 text-white focus:outline-none cursor-pointer"
         />
       </label>
 
-      <label>
-        End date
+      <label className="text-white">
+        Slutdatum
         <input
           type="date"
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
           required
-          className="border w-full p-1"
+          className="w-full p-3 mt-1 rounded bg-white/20 text-white focus:outline-none cursor-pointer"
         />
       </label>
 
-      <label>
-        People
+      <label className="text-white">
+        Antal personer
         <input
           type="number"
           value={people}
           onChange={(e) => setPeople(Number(e.target.value))}
           min={1}
           required
-          className="border w-full p-1"
+          className="w-full p-3 mt-1 rounded bg-white/20 text-white focus:outline-none cursor-pointer"
         />
       </label>
 
       <button
         type="submit"
         disabled={loading}
-        className="bg-blue-500 text-white p-1 mt-2"
+        className="mt-4 p-3 rounded bg-custom-green text-white hover:bg-gray-500 transition-colors"
       >
-        {loading ? "Creating..." : "Create"}
+        {loading ? "Skapar..." : "Skapa bokning"}
       </button>
 
-      {error && <p className="text-red-500 text-sm">{error}</p>}
-      {success && <p className="text-green-600 text-sm">{success}</p>}
+      {error && <p className="text-red-300 text-sm mt-2">{error}</p>}
+      {success && <p className="text-green-200 text-sm mt-2">{success}</p>}
     </form>
   );
 }
