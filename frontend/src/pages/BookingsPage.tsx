@@ -1,14 +1,15 @@
 import { Navbar } from "../components/Navbar.tsx";
-import { BookingsList } from "../features/create-booking/components/BookingsList.tsx";
+import { BookingsList } from "../features/bookings/components/BookingsList.tsx";
+import bgImage from "../assets/landet2.jpg";
 
 export function BookingsPage() {
   return (
-    <>
+    <div
+      className="min-h-screen bg-cover bg-center pt-4"
+      style={{ backgroundImage: `url(${bgImage})` }}
+    >
       <Navbar />
-      <div className="p-4">
-        <h1 className="text-2xl font-bold mb-4">Your Bookings</h1>
-        <BookingsList />
-      </div>
-    </>
+      <BookingsList />
+    </div>
   );
 }
