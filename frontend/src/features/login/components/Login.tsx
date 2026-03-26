@@ -20,7 +20,7 @@ export function Login() {
     /* update errorhandling later! */
     try {
     await login(username, password);
-    navigate("/home");
+    navigate("/bookings");
   } catch (err: unknown) {
     setError(err instanceof Error ? err.message : "Login failed");
   } finally {

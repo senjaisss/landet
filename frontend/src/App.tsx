@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { HomePage } from "./pages/HomePage";
+import { BookingsPage } from "./pages/BookingsPage";
 import { LandingPage } from "./pages/LandingPage";
 import { ProtectedRoute } from "./features/login/components/ProtectedRoutes";
+import { CreateBookingsPage } from "./pages/CreateBookingPage";
 
 function App() {
   return (
@@ -9,10 +10,18 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route
-          path="/home"
+          path="/bookings"
           element={
             <ProtectedRoute>
-              <HomePage />
+              <BookingsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/create-booking"
+          element={
+            <ProtectedRoute>
+              <CreateBookingsPage />
             </ProtectedRoute>
           }
         />
