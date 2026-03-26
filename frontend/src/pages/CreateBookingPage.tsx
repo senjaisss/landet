@@ -1,5 +1,5 @@
 import { Navbar } from "../components/Navbar";
-import { BookingForm } from "../features/bookings/components/BookingForm";
+import { BookingForm } from "../features/create-booking/components/BookingForm";
 
 export function CreateBookingsPage() {
   return (
