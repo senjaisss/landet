@@ -1,15 +1,34 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export function Navbar() {
   return (
-    <nav className="bg-gray-200 p-4 flex justify-center">
-      <div className="flex space-x-8">
-        <Link to="/bookings" className="text-gray-800 hover:text-gray-600 font-medium">
-          Bookings
-        </Link>
-        <Link to="/create-booking" className="text-gray-800 hover:text-gray-600 font-medium">
-          New Booking
-        </Link>
+    <nav className="flex justify-center mt-4">
+      <div className="bg-green-200/70 px-6 py-3 rounded-full flex space-x-8">
+        <NavLink
+          to="/bookings"
+          className={({ isActive }: { isActive: boolean }) =>
+            `relative font-medium ${
+              isActive
+                ? "text-custom-green"
+                : "text-gray-500 hover:text-custom-green"
+            }`
+          }
+        >
+          BOKNINGAR
+        </NavLink>
+
+        <NavLink
+          to="/create-booking"
+          className={({ isActive }: { isActive: boolean }) =>
+            `relative font-medium ${
+              isActive
+                ? "text-custom-green"
+                : "text-gray-500 hover:text-custom-green"
+            }`
+          }
+        >
+          NY BOKNING
+        </NavLink>
       </div>
     </nav>
   );

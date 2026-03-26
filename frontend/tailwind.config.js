@@ -5,7 +5,14 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: [ "Lexend Deca", "sans-serif" ]
+      },
+      colors: {
+        "custom-green": "#447159",
+      },
+    },
   },
   plugins: [],
 };
