@@ -29,36 +29,37 @@ export function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <form onSubmit={handleLogin} className="flex flex-col w-64">
-        <label className="mb-2">
-          Username
+    <div className="flex justify-center items-center min-h-screen">
+      <form onSubmit={handleLogin} 
+      className="flex flex-col w-80 p-10 rounded-2xl bg-green-500/10 backdrop-blur-md">
+        <label className="mb-2 text-white">
+          Användarnamn
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
-            className="w-full border p-1"
+            className="w-full p-2 rounded mt-1 text-custom-green focus:outline-none"
           />
         </label>
 
-        <label className="mb-2">
-          Password
+        <label className="mb-2 text-white">
+          Lösenord
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full border p-1"
+            className="w-full p-2 rounded mt-1 text-custom-green focus:outline-none"
           />
         </label>
 
         <button
           type="submit"
           disabled={loading}
-          className="bg-blue-500 text-white p-1 mt-2"
+          className="bg-custom-green text-white p-2 mt-4 rounded hover:bg-gray-500 transition-colors"
         >
-          {loading ? "Logging in..." : "Login"}
+          {loading ? "Loggar in..." : "Logga in"}
         </button>
 
         {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
