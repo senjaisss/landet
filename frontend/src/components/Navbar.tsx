@@ -3,14 +3,14 @@ import { NavLink } from "react-router-dom";
 export function Navbar() {
   return (
     <nav className="flex justify-center mt-4">
-      <div className="bg-green-200/70 px-6 py-3 rounded-full flex space-x-8">
+      <div className="bg-green-200/70 px-6 py-3 rounded-full bg-green-500/20 backdrop-blur-md flex space-x-8">
         <NavLink
           to="/bookings"
           className={({ isActive }: { isActive: boolean }) =>
             `relative font-medium ${
               isActive
-                ? "text-custom-green"
-                : "text-gray-500 hover:text-custom-green"
+                ? "text-green-200"
+                : "text-white hover:text-custom-green"
             }`
           }
         >
@@ -22,8 +22,8 @@ export function Navbar() {
           className={({ isActive }: { isActive: boolean }) =>
             `relative font-medium ${
               isActive
-                ? "text-custom-green"
-                : "text-gray-500 hover:text-custom-green"
+                ? "text-green-200"
+                : "text-white hover:text-custom-green"
             }`
           }
         >
