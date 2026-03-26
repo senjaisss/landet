@@ -1,5 +1,5 @@
 import { Navbar } from "../components/Navbar.tsx";
-import { BookingsList } from "../features/timeline/components/BookingsList";
+import { BookingsList } from "../features/create-booking/components/BookingsList.tsx";
 
 export function BookingsPage() {
   return (
