@@ -11,7 +11,7 @@ export function CreateBookingsPage() {
       <div className="min-h-screen flex flex-col">
         <Navbar />
 
-        <div className="flex flex-1 justify-center items-center">
+        <div className="flex flex-1 justify-center items-center pt-10 pb-5">
           <BookingForm />
         </div>
       </div>
