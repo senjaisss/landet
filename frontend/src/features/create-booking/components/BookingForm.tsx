@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useBooking } from "../hooks/useBooking";
-import { DayPicker } from "react-day-picker";
 import type { DateRange } from "react-day-picker";
-import "react-day-picker/dist/style.css";
+
+import { MyCalendar } from "./Calender";
 
 export function BookingForm() {
   const { create, loading, error } = useBooking();
@@ -36,16 +36,7 @@ export function BookingForm() {
       className="flex flex-col w-full max-w-3xl p-12 rounded-2xl bg-green-500/10 backdrop-blur-md space-y-4"
     >
       <h2 className="text-white text-xl mb-2">Skapa bokning</h2>
-
-      <div className="text-white">
-        <div className="bg-white/20 p-4 rounded">
-          <DayPicker
-            mode="range"
-            selected={range}
-            onSelect={setRange}
-          />
-        </div>
-      </div>
+      <MyCalendar range={range} onSelect={setRange} />
 
       <label className="text-white">
         Antal personer
