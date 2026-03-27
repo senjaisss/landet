@@ -1,29 +1,32 @@
 import { useState } from "react";
 import { useBooking } from "../hooks/useBooking";
+import { DayPicker } from "react-day-picker";
+import type { DateRange } from "react-day-picker";
+import "react-day-picker/dist/style.css";
 
 export function BookingForm() {
   const { create, loading, error } = useBooking();
-
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
   const [people, setPeople] = useState(1);
-
+  const [range, setRange] = useState<DateRange | undefined>();
   const [success, setSuccess] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
+  const formatDate = (date?: Date) =>
+    date ? date.toISOString().split("T")[0] : "";
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSuccess(null);
 
+    if (!range?.from || !range?.to) return;
+
     const booking = await create({
-      startDate,
-      endDate,
+      startDate: formatDate(range.from),
+      endDate: formatDate(range.to),
       people,
     });
 
     setSuccess(`Booking created: ${booking.bookingId}`);
-
-    setStartDate("");
-    setEndDate("");
+    setRange(undefined);
     setPeople(1);
   };
 
@@ -34,27 +37,15 @@ export function BookingForm() {
     >
       <h2 className="text-white text-xl mb-2">Skapa bokning</h2>
 
-      <label className="text-white">
-        Startdatum
-        <input
-          type="date"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
-          required
-          className="w-full p-3 mt-1 rounded bg-white/20 text-white focus:outline-none cursor-pointer"
-        />
-      </label>
-
-      <label className="text-white">
-        Slutdatum
-        <input
-          type="date"
-          value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
-          required
-          className="w-full p-3 mt-1 rounded bg-white/20 text-white focus:outline-none cursor-pointer"
-        />
-      </label>
+      <div className="text-white">
+        <div className="bg-white/20 p-4 rounded">
+          <DayPicker
+            mode="range"
+            selected={range}
+            onSelect={setRange}
+          />
+        </div>
+      </div>
 
       <label className="text-white">
         Antal personer
