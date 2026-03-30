@@ -10,55 +10,61 @@ provider:
   region: eu-north-1
   deploymentBucket: landet-bucket
   role: ${env:IAM_ROLE}
+
   environment:
     USERS_TABLE: ${env:USERS_TABLE}
     BOOKINGS_TABLE: ${env:BOOKINGS_TABLE}
     JWT_SECRET: ${env:JWT_SECRET}
 
-httpApi:
-  cors:
-    allowedOrigins:
-      - http://localhost:5173
-    allowedHeaders:
-      - Content-Type
-      - Authorization
-    allowedMethods:
-      - GET
-      - POST
-      - PUT
-      - DELETE
+  httpApi:
+    cors:
+      allowedOrigins:
+        - http://localhost:5173
+      allowedHeaders:
+        - Content-Type
+        - Authorization
+      allowedMethods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+      allowCredentials: true
 
 functions:
   login:
     handler: endpoints/login.handler
     events:
-      - http:
-          path: login
-          method: POST
+      - httpApi:
+          path: /login
+          method: post
+
   getBookings:
     handler: endpoints/getBookings.handler
     events:
-      - http:
-          path: bookings
-          method: GET
+      - httpApi:
+          path: /bookings
+          method: get
+
   createBooking:
     handler: endpoints/createBooking.handler
     events:
-      - http:
-          path: booking
-          method: POST
+      - httpApi:
+          path: /booking
+          method: post
+
   deleteBooking:
     handler: endpoints/deleteBooking.handler
     events:
-      - http:
-          path: bookings/{bookingId}
-          method: DELETE
+      - httpApi:
+          path: /bookings/{bookingId}
+          method: delete
+
   updateBooking:
     handler: endpoints/updateBooking.handler
     events:
-      - http:
-          path: bookings/{bookingId}
-          method: PUT
+      - httpApi:
+          path: /bookings/{bookingId}
+          method: put
 
 resources:
   Resources:
