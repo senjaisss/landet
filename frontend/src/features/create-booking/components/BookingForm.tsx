@@ -35,8 +35,9 @@ export function BookingForm() {
       onSubmit={handleSubmit}
       className="flex flex-col w-full max-w-3xl p-12 rounded-2xl bg-green-500/10 backdrop-blur-md space-y-4"
     >
-      <h2 className="text-white text-xl mb-2">Skapa bokning</h2>
-      <MyCalendar range={range} onSelect={setRange} />
+      <div className="flex justify-center">
+        <MyCalendar range={range} onSelect={setRange} />
+      </div>
 
       <label className="text-white">
         Antal personer
@@ -45,6 +46,7 @@ export function BookingForm() {
           value={people}
           onChange={(e) => setPeople(Number(e.target.value))}
           min={1}
+          max={10}
           required
           className="w-full p-3 mt-1 rounded bg-white/20 text-white focus:outline-none cursor-pointer"
         />
