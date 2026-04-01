@@ -1,4 +1,3 @@
-// components/MyCalendar.tsx
 import { DayPicker, getDefaultClassNames } from "react-day-picker";
 import type { DateRange } from "react-day-picker";
 import { sv } from "date-fns/locale";

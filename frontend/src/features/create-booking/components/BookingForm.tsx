@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useBooking } from "../hooks/useBooking";
 import type { DateRange } from "react-day-picker";
 
-import { MyCalendar } from "./Calender";
-import { ConfirmationDialog } from "../../../components/ConfirmationDialog";
+import { useBooking } from "/@features/create-booking/hooks/useBooking";
+import { MyCalendar } from "/@features/create-booking/components/Calender";
+import { ConfirmationDialog } from "/@components/ConfirmationDialog";
 
 export function BookingForm() {
   const { create, loading } = useBooking();

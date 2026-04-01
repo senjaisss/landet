@@ -1,6 +1,6 @@
-import { Navbar } from "../components/Navbar";
-import { BookingForm } from "../features/create-booking/components/BookingForm";
-import bgImage from "../assets/landet2.jpg";
+import { Navbar } from "/@components/Navbar.tsx";
+import { BookingForm } from "/@features/create-booking/components/BookingForm";
+import bgImage from "/@assets/landet2.jpg";
 
 export function CreateBookingsPage() {
   return (

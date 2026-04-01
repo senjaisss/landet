@@ -1,5 +1,5 @@
-import { Login } from "../features/login/components/Login";
-import bgImage from "../assets/landet2.jpg";
+import { Login } from "/@features/login/components/Login";
+import bgImage from "/@assets/landet2.jpg";
 
 export function LandingPage() {
   return (
