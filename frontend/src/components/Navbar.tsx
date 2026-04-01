@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../features/login/hooks/useAuth";
+import { useAuth } from "/@features/login/hooks/useAuth";
 
 export function Navbar() {
   const { logout } = useAuth();

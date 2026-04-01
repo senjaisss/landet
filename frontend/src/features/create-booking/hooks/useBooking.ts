@@ -1,6 +1,6 @@
 import { useState } from "react";
-import type { CreateBookingInput, Booking } from "../services/booking";
-import { createBooking } from "../services/booking";
+import type { CreateBookingInput, Booking } from "/@features/create-booking/services/booking";
+import { createBooking } from "/@features/create-booking/services/booking";
 
 export function useBooking() {
   const [loading, setLoading] = useState(false);

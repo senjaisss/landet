@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { deleteBooking } from "../services/deleteBookings";
+import { deleteBooking } from "/@features/bookings/services/deleteBookings";
 
 export function useDeleteBooking() {
   const [loading, setLoading] = useState(false);

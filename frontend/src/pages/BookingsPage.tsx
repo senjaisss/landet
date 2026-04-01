@@ -1,6 +1,6 @@
-import { Navbar } from "../components/Navbar.tsx";
-import { BookingsList } from "../features/bookings/components/BookingsList.tsx";
-import bgImage from "../assets/landet2.jpg";
+import { Navbar } from "/@components/Navbar.tsx";
+import { BookingsList } from "/@features/bookings/components/BookingsList";
+import bgImage from "/@assets/landet2.jpg";
 
 export function BookingsPage() {
   return (

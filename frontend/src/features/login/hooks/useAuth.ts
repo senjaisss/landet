@@ -1,4 +1,4 @@
-import { login as loginRequest } from "../services/login";
+import { login as loginRequest } from "/@features/login/services/login";
 
 export function useAuth() {
   const login = async (userId: string, password: string) => {

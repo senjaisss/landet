@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useBookings } from "../hooks/useBookings";
-import { useDeleteBooking } from "../hooks/useDeleteBookings";
-import { ConfirmationDialog } from "../../../components/ConfirmationDialog";
+import { useBookings } from "/@features/bookings/hooks/useBookings";
+import { useDeleteBooking } from "/@features/bookings/hooks/useDeleteBookings";
+import { ConfirmationDialog } from "/@components/ConfirmationDialog";
 
 export function BookingsList() {
   const [dialogOpen, setDialogOpen] = useState(false);
