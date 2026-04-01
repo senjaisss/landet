@@ -17,16 +17,16 @@ export const validateBooking = (
     const end = new Date(newBooking.endDate);
 
     if (start > end) {
-        throw new createError.BadRequest("Start date cannot be after end date");
+        throw new createError.BadRequest("Start datum kan ej vara efter slut datum.");
     }
 
     if (start < today) {
-        throw new createError.BadRequest("Start date cannot be in the past");
+        throw new createError.BadRequest("Start datum har redan passerat.");
     }
 
     const duration = (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24) + 1;
     if (duration > 14) {
-        throw new createError.BadRequest("Booking cannot be longer than 14 days");
+        throw new createError.BadRequest("En bokning kan ej vara längre än 14 dagar.");
     }
 
     for (const booking of existingBookings) {
@@ -34,16 +34,16 @@ export const validateBooking = (
         const existingEnd = new Date(booking.endDate);
 
         if (start <= existingEnd && end >= existingStart) {
-            throw new createError.BadRequest("Booking dates overlap with an existing booking");
+            throw new createError.BadRequest("Datumen överlappar med en befintlig bokning.");
         }
     }
 
     if (newBooking.people < 1) {
-        throw new createError.BadRequest("Number of people must be at least 1");
+        throw new createError.BadRequest("Antal personer måste vara minst 1.");
     }
 
     if (newBooking.people > 10 ) {
-        throw new createError.BadRequest("Number of people cannot be over 10");
+        throw new createError.BadRequest("Antal personer kan ej vara mer än 10.");
     }
 
     return true;
