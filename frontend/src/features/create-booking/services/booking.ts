@@ -34,11 +34,21 @@ export async function createBooking(
     body: JSON.stringify(input),
   });
 
+  const raw = await res.text();
+
   if (!res.ok) {
-    const error = await res.text();
-    throw new Error(`Create booking failed: ${error}`);
+    let message = "Okänt fel";
+
+    try {
+      const data = JSON.parse(raw);
+      message = data.message || message;
+    } catch {
+      if (raw) message = raw;
+    }
+
+    throw new Error(message);
   }
 
-  const data: CreateBookingResponse = await res.json();
+  const data: CreateBookingResponse = JSON.parse(raw);
   return data.data;
 }

@@ -3,33 +3,54 @@ import { useBooking } from "../hooks/useBooking";
 import type { DateRange } from "react-day-picker";
 
 import { MyCalendar } from "./Calender";
+import { ConfirmationDialog } from "../../../components/ConfirmationDialog";
 
 export function BookingForm() {
-  const { create, loading, error } = useBooking();
+  const { create, loading } = useBooking();
   const [people, setPeople] = useState(1);
   const [range, setRange] = useState<DateRange | undefined>();
-  const [success, setSuccess] = useState<string | null>(null);
+  const [dialog, setDialog] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
 
   const formatDate = (date?: Date) =>
     date ? date.toISOString().split("T")[0] : "";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSuccess(null);
 
     if (!range?.from || !range?.to) return;
 
-    const booking = await create({
-      startDate: formatDate(range.from),
-      endDate: formatDate(range.to),
-      people,
-    });
+    try {
+      const booking = await create({
+        startDate: formatDate(range.from),
+        endDate: formatDate(range.to),
+        people,
+      });
 
-    setSuccess(`Booking created: ${booking.bookingId}`);
-    setRange(undefined);
-    setPeople(1);
+      setDialog({
+        type: "success",
+        message: `Bokning skapad! ID: ${booking.bookingId}`,
+      });
+
+      setRange(undefined);
+      setPeople(1);
+    } catch (err: unknown) {
+      let errorMessage = "Okänt fel";
+
+      if (err instanceof Error) {
+        errorMessage = err.message;
+      } else if (typeof err === "string") {
+        errorMessage = err;
+      }
+
+      setDialog({
+        type: "error",
+        message: "Bokning misslyckades. " + errorMessage,
+      });
+    }
   };
-
   return (
     <form
       onSubmit={handleSubmit}
@@ -60,8 +81,12 @@ export function BookingForm() {
         {loading ? "Skapar..." : "Skapa bokning"}
       </button>
 
-      {error && <p className="text-red-300 text-sm mt-2">{error}</p>}
-      {success && <p className="text-green-200 text-sm mt-2">{success}</p>}
+      <ConfirmationDialog
+        open={!!dialog}
+        type={dialog?.type}
+        message={dialog?.message || ""}
+        onCancel={() => setDialog(null)}
+      />
     </form>
   );
 }
