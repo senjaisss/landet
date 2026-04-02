@@ -12,6 +12,7 @@ export function BookingsPage() {
         <Navbar />
 
         <div className="flex flex-1 justify-center items-center pt-10 pb-5">
+          <h1 className="sr-only">Lista av befintliga bokningar</h1>
           <BookingsList />
         </div>
       </div>

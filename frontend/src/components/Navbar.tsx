@@ -11,41 +11,47 @@ export function Navbar() {
   };
 
   return (
-    <nav className="flex justify-center mt-4">
-      <div className="bg-green-200/70 px-6 py-3 rounded-full bg-green-500/20 backdrop-blur-md flex space-x-8">
-        <NavLink
-          to="/bookings"
-          className={({ isActive }: { isActive: boolean }) =>
-            `relative font-medium ${
-              isActive
-                ? "text-green-200"
-                : "text-white hover:text-custom-green"
-            }`
-          }
-        >
-          BOKNINGAR
-        </NavLink>
+    <nav className="flex justify-center mt-4" aria-label="Huvudnavigering">
+      <ul className="bg-green-200/70 px-6 py-3 rounded-full bg-green-500/20 backdrop-blur-md flex space-x-8">
+        <li>
+          <NavLink
+            to="/bookings"
+            className={({ isActive }: { isActive: boolean }) =>
+              `relative font-medium ${
+                isActive
+                  ? "text-green-200"
+                  : "text-white hover:text-custom-green"
+              }`
+            }
+          >
+            BOKNINGAR
+          </NavLink>
+        </li>
 
-        <NavLink
-          to="/create-booking"
-          className={({ isActive }: { isActive: boolean }) =>
-            `relative font-medium ${
-              isActive
-                ? "text-green-200"
-                : "text-white hover:text-custom-green"
-            }`
-          }
-        >
-          NY BOKNING
-        </NavLink>
+        <li>
+          <NavLink
+            to="/create-booking"
+            className={({ isActive }: { isActive: boolean }) =>
+              `relative font-medium ${
+                isActive
+                  ? "text-green-200"
+                  : "text-white hover:text-custom-green"
+              }`
+            }
+          >
+            NY BOKNING
+          </NavLink>
+        </li>
 
-        <button
-        onClick={handleLogout}
-        className="text-white hover:text-red-300"
-      >
-        Logga ut
-      </button>
-      </div>
+        <li>
+          <button
+            onClick={handleLogout}
+            className="text-white hover:text-red-300"
+          >
+            Logga ut
+          </button>
+        </li>
+      </ul>
     </nav>
   );
 }
