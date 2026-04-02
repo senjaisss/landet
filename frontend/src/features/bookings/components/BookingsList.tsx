@@ -13,7 +13,7 @@ export function BookingsList() {
 
   if (loading) return;
   if (error) return <p className="text-red-500">{error}</p>;
-  if (bookings.length === 0) return <p>No bookings found.</p>;
+  if (bookings.length === 0) return <p className="text-white">Inga bokningar hittades...</p>;
 
   const sortedBookings = [...bookings].sort(
     (a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime(),
