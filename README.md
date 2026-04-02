@@ -5,11 +5,11 @@ En bokningsapp för familjer som delar på ett landställe
 ## Login/Testanvändare
 
 ### Family-1
-Användarnamn: test
+Användarnamn: test<br>
 Lösenord: testuser
 
 ### Family-2
-Användarnamn: kalle
+Användarnamn: kalle<br>
 Lösenord: kalletest
 
 ## Miljövariabler
