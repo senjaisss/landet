@@ -12,7 +12,7 @@ export function MyCalendar({ range, onSelect }: MyCalendarProps) {
   const defaultClassNames = getDefaultClassNames();
 
   return (
-    <div className="text-white backdrop-blur-xl">
+    <div className="text-white backdrop-blur-xl" aria-label="Välj datum för bokning">
       <DayPicker
         mode="range"
         selected={range}
